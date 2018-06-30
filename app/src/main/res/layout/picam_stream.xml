@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#607D8B"
+    android:gravity="center_vertical"
+    android:orientation="vertical" >
+
+    <com.littlebandit.piborgrc.camstream.GStreamerSurfaceView
+        android:id="@+id/surface_video"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/textview_message"
+        android:text="@string/picamera"
+        android:textColor="#00ff04"
+        android:layout_marginTop="16dip"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <RelativeLayout
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <com.littlebandit.piborgrc.remotecontrol.RCButton
+            android:id="@+id/base"
+            android:src="@drawable/ic_adjust"
+            android:visibility="invisible"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+
+        <com.littlebandit.piborgrc.remotecontrol.RCButton
+            android:id="@+id/btnUp"
+            android:src="@drawable/ic_arrow_upward"
+            android:tint="#FFFFFF"
+            android:layout_toRightOf="@+id/base"
+            android:layout_toEndOf="@+id/base"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+
+        <com.littlebandit.piborgrc.remotecontrol.RCButton
+            android:id="@+id/center"
+            android:src="@drawable/ic_adjust"
+            android:layout_below="@+id/btnUp"
+            android:layout_alignLeft="@+id/btnUp"
+            android:layout_alignStart="@+id/btnUp"
+            android:visibility="invisible"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+
+        <com.littlebandit.piborgrc.remotecontrol.RCButton
+            android:id="@+id/btnLeft"
+            android:src="@drawable/ic_arrow_back"
+            android:tint="#FFFFFF"
+            android:layout_toLeftOf="@+id/center"
+            android:layout_toStartOf="@+id/center"
+            android:layout_alignTop="@+id/center"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+
+        <com.littlebandit.piborgrc.remotecontrol.RCButton
+            android:id="@+id/btnDown"
+            android:src="@drawable/ic_arrow_downward"
+            android:tint="#FFFFFF"
+            android:layout_below="@+id/center"
+            android:layout_alignLeft="@+id/center"
+            android:layout_alignStart="@+id/center"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+
+        <com.littlebandit.piborgrc.remotecontrol.RCButton
+            android:id="@+id/btnRight"
+            android:src="@drawable/ic_arrow_forward"
+            android:tint="#FFFFFF"
+            android:layout_toRightOf="@+id/center"
+            android:layout_toEndOf="@+id/center"
+            android:layout_alignTop="@+id/center"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+
+    </RelativeLayout>
+
+</RelativeLayout>
