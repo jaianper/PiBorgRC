@@ -1,0 +1,9 @@
+/app/gst-build*
+/app/build
+/app/.externalNativeBuild
+/.idea
+/.gradle
+
+*.iml
+
+local.properties
