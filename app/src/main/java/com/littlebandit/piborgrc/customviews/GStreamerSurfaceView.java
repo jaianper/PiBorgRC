@@ -1,4 +1,4 @@
-package com.littlebandit.piborgrc.camstream;
+package com.littlebandit.piborgrc.customviews;
 
 import android.content.Context;
 import android.util.AttributeSet;

@@ -1,4 +1,4 @@
-package com.littlebandit.piborgrc.remotecontrol;
+package com.littlebandit.piborgrc.customviews;
 
 import android.content.Context;
 import android.graphics.Color;

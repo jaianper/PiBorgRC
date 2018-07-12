@@ -24,7 +24,7 @@
         </activity>
 
         <activity
-            android:name=".camstream.PICamStream"
+            android:name=".remotecontrol.PiCameraStream"
             android:theme="@style/AppTheme.CamStream"
             android:screenOrientation="landscape" />
 

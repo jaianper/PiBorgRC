@@ -1,10 +1,8 @@
 <resources>
     <string name="app_name">DiddyBorg RC</string>
-    <string name="button_play">Play</string>
-    <string name="button_stop">Stop</string>
     
-    <string name="camera_stream">Cámara en vivo</string>
-    <string name="remote_control">Control remoto</string>
+    <string name="camera_stream">Live camera</string>
+    <string name="remote_control">Remote control</string>
 
     <string name="picamera">DiddyBorg Camera</string>
 </resources>

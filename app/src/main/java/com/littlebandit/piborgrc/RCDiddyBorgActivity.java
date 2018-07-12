@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.littlebandit.piborgrc.camstream.PICamStream;
+import com.littlebandit.piborgrc.remotecontrol.PiCameraStream;
 //import com.xd.racast.networkservice.WiFiDirectManager;
 
 public class RCDiddyBorgActivity extends AppCompatActivity implements View.OnClickListener {
@@ -18,10 +18,10 @@ public class RCDiddyBorgActivity extends AppCompatActivity implements View.OnCli
 
         //WiFiDirectManager.newInstance(this).initializeService();
 
-        Button btnCameraStream = (Button)findViewById(R.id.btnPICameraStream);
+        Button btnCameraStream = findViewById(R.id.btnPICameraStream);
         btnCameraStream.setOnClickListener(this);
 
-        Button btnRemoteControl = (Button)findViewById(R.id.btnRemoteControl);
+        Button btnRemoteControl = findViewById(R.id.btnRemoteControl);
         btnRemoteControl.setOnClickListener(this);
     }
 
@@ -46,7 +46,7 @@ public class RCDiddyBorgActivity extends AppCompatActivity implements View.OnCli
         {
             case R.id.btnPICameraStream:
             {
-                Intent intent = new Intent(RCDiddyBorgActivity.this, PICamStream.class);
+                Intent intent = new Intent(RCDiddyBorgActivity.this, PiCameraStream.class);
                 startActivity(intent);
             }break;
             case R.id.btnRemoteControl:

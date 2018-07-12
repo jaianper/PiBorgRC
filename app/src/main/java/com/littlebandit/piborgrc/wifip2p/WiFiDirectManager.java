@@ -1,4 +1,4 @@
-package com.littlebandit.piborgrc.networkservice;
+package com.littlebandit.piborgrc.wifip2p;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;
@@ -24,18 +24,18 @@ import java.util.Map;
 
 public class WiFiDirectManager implements ConnectionInfoListener, GroupInfoListener
 {
-    WifiP2pManager mManager;
-    WifiP2pManager.Channel mChannel;
-    BroadcastReceiver mReceiver;
-    IntentFilter mIntentFilter;
+    private WifiP2pManager mManager;
+    private WifiP2pManager.Channel mChannel;
+    private BroadcastReceiver mReceiver;
+    private IntentFilter mIntentFilter;
     private static WiFiDirectManager ourInstance;
     private Activity mActivity;
 
     private final static String TAG = "WiFiDirectManager";
 
     private final static int SERVER_PORT = 9001;
-    public static final String SERVICE_INSTANCE = "_wifip2pdiddyborg";
-    public static final String SERVICE_REG_TYPE = "_presence._tcp";
+    private static final String SERVICE_INSTANCE = "_wifip2pdiddyborg";
+    private static final String SERVICE_REG_TYPE = "_presence._tcp";
 
     public static WiFiDirectManager newInstance(Activity activity)
     {

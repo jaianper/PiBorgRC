@@ -1,4 +1,4 @@
-package com.littlebandit.piborgrc.networkservice;
+package com.littlebandit.piborgrc.wifip2p;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;
