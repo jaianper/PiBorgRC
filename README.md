@@ -20,6 +20,7 @@ To make the python script load on its own, do the following:
 The cron table should now auto-run the script when the Raspberry Pi boots up.
 
 ### For more Info:
+- [DiddyBorg Metal - Build](https://www.piborg.org/blog/build/diddyborg-metal-build)
 - [Raspberry Pi Camera Module](https://www.raspberrypi.org/documentation/raspbian/applications/camera.md)
 - [Python interface to the Raspberry Pi camera](https://picamera.readthedocs.io/en/release-1.13/)
 - [Installing GStreamer for Android development](https://gstreamer.freedesktop.org/documentation/installing/for-android-development.html)
