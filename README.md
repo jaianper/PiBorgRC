@@ -7,12 +7,12 @@ Android App to control Raspberry pi robots using the PicoBorg Reverse motor cont
 
 ## Auto start at boot
 
-To get the web interface to load on its own do the following:
+To make the python script load on its own, do the following:
 
-1. Open the Cron table using crontab -e
+1. Open the Cron table using `crontab -e`
 2. Add a cron job to the bottom of the file using the following line:
 
-    @reboot sudo /<directory-path>/MetalborgController.py
+    ```@reboot sudo /<directory-path>/MetalborgController.py```
     
 3. Save the file
 4. Close the file
