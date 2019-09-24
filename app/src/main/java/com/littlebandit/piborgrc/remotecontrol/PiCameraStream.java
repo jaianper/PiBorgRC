@@ -12,7 +12,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.littlebandit.piborgrc.R;
-import com.littlebandit.piborgrc.remotecontrol.TcpClient;
 import com.littlebandit.piborgrc.customviews.RCButton;
 
 import org.freedesktop.gstreamer.GStreamer;
@@ -48,9 +47,12 @@ public class PiCameraStream extends Activity implements SurfaceHolder.Callback
         super.onCreate(savedInstanceState);
 
         // Initialize GStreamer and warn if it fails
-        try {
+        try
+        {
             GStreamer.init(this);
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
             finish();
             return;
@@ -79,7 +81,8 @@ public class PiCameraStream extends Activity implements SurfaceHolder.Callback
 
         btnForward.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
+            public boolean onTouch(View view, MotionEvent motionEvent)
+            {
                 int action = motionEvent.getActionMasked();
 
                 if(action == MotionEvent.ACTION_DOWN) driveMetalBorg(1, 1);
@@ -92,7 +95,8 @@ public class PiCameraStream extends Activity implements SurfaceHolder.Callback
 
         btnReverse.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
+            public boolean onTouch(View view, MotionEvent motionEvent)
+            {
                 int action = motionEvent.getActionMasked();
 
                 if(action == MotionEvent.ACTION_DOWN) driveMetalBorg(-1, -1);
@@ -105,7 +109,8 @@ public class PiCameraStream extends Activity implements SurfaceHolder.Callback
 
         btnLeft.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
+            public boolean onTouch(View view, MotionEvent motionEvent)
+            {
                 int action = motionEvent.getActionMasked();
 
                 if(action == MotionEvent.ACTION_DOWN) driveMetalBorg(-1, 1);
@@ -118,7 +123,8 @@ public class PiCameraStream extends Activity implements SurfaceHolder.Callback
 
         btnRight.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
+            public boolean onTouch(View view, MotionEvent motionEvent)
+            {
                 int action = motionEvent.getActionMasked();
 
                 if(action == MotionEvent.ACTION_DOWN) driveMetalBorg(1, -1);
@@ -132,7 +138,8 @@ public class PiCameraStream extends Activity implements SurfaceHolder.Callback
 
     private void driveMetalBorg(int left, int right)
     {
-        if (mTcpClient != null) {
+        if (mTcpClient != null)
+        {
             mTcpClient.sendMessage("/set/" + left*-1 + "/" + right*-1);
             // mTcpClient.sendMessage("/set/" + left + "/" + right);
         }
@@ -146,16 +153,19 @@ public class PiCameraStream extends Activity implements SurfaceHolder.Callback
         }
     }
 
-    protected void onDestroy() {
+    protected void onDestroy()
+    {
         nativeFinalize();
         super.onDestroy();
     }
 
     // Called from native code. This sets the content of the TextView from the UI thread.
-    private void setMessage(final String message) {
+    private void setMessage(final String message)
+    {
         final TextView tv = this.findViewById(R.id.textview_message);
         runOnUiThread (new Runnable() {
-            public void run() {
+            public void run()
+            {
                 tv.setText(message);
             }
         });
@@ -163,51 +173,58 @@ public class PiCameraStream extends Activity implements SurfaceHolder.Callback
 
     // Called from native code. Native code calls this once it has created its pipeline and
     // the main loop is running, so it is ready to accept commands.
-    private void onGStreamerInitialized () {
+    private void onGStreamerInitialized ()
+    {
         Log.i ("GStreamer", "Gst initialized. Restoring state, to stream.");
         // Restore previous playing state
-        if (is_playing_desired) {
+        if (is_playing_desired)
+        {
             nativePlay();
         }
-        else {
+        else
+        {
             nativePause();
         }
     }
 
-    static {
+    static
+    {
         System.loadLibrary("gstreamer_android");
         System.loadLibrary("cam_stream");
         nativeClassInit();
     }
 
-    public void surfaceChanged(SurfaceHolder holder, int format, int width,
-                               int height) {
+    public void surfaceChanged(SurfaceHolder holder, int format, int width, int height)
+    {
         Log.d("GStreamer", "Surface changed to format " + format + " width "
                 + width + " height " + height);
         nativeSurfaceInit (holder.getSurface());
     }
 
-    public void surfaceCreated(SurfaceHolder holder) {
+    public void surfaceCreated(SurfaceHolder holder)
+    {
         Log.d("GStreamer", "Surface created: " + holder.getSurface());
         //is_playing_desired = true;
         //nativePlay();
     }
 
-    public void surfaceDestroyed(SurfaceHolder holder) {
+    public void surfaceDestroyed(SurfaceHolder holder)
+    {
         Log.d("GStreamer", "Surface destroyed");
         nativeSurfaceFinalize ();
     }
 
-    public class ConnectTask extends AsyncTask<String, String, TcpClient> {
-
+    public class ConnectTask extends AsyncTask<String, String, TcpClient>
+    {
         @Override
-        protected TcpClient doInBackground(String... message) {
-
+        protected TcpClient doInBackground(String... message)
+        {
             //we create a TCPClient object
             mTcpClient = new TcpClient(new TcpClient.OnMessageReceived() {
                 @Override
                 //here the messageReceived method is implemented
-                public void messageReceived(String message) {
+                public void messageReceived(String message)
+                {
                     //this method calls the onProgressUpdate
                     publishProgress(message);
                 }
@@ -218,7 +235,8 @@ public class PiCameraStream extends Activity implements SurfaceHolder.Callback
         }
 
         @Override
-        protected void onProgressUpdate(String... values) {
+        protected void onProgressUpdate(String... values)
+        {
             super.onProgressUpdate(values);
             //response received from server
             Log.d("test", "response " + values[0]);
@@ -227,10 +245,9 @@ public class PiCameraStream extends Activity implements SurfaceHolder.Callback
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
-        if (mTcpClient != null) {
-            mTcpClient.stopClient();
-        }
+    public void onBackPressed()
+    {
+        if (mTcpClient != null) mTcpClient.stopClient();
+        super.onBackPressed();
     }
 }

@@ -15,15 +15,18 @@ import com.littlebandit.piborgrc.R;
 
 public class RCButton extends AppCompatImageButton
 {
-    public RCButton(Context context) {
+    public RCButton(Context context)
+    {
         this(context, null);
     }
 
-    public RCButton(Context context, AttributeSet attrs) {
+    public RCButton(Context context, AttributeSet attrs)
+    {
         this(context, attrs, 0);
     }
 
-    public RCButton(Context context, AttributeSet attrs, int defStyleAttr) {
+    public RCButton(Context context, AttributeSet attrs, int defStyleAttr)
+    {
         super(context, attrs, defStyleAttr);
 
         int padding = (int)getResources().getDimension(R.dimen.button_padding);

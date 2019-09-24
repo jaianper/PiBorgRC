@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">DiddyBorg RC</string>
+    <string name="app_name">Metalborg RC</string>
     
     <string name="camera_stream">Live camera</string>
     <string name="remote_control">Remote control</string>
 
-    <string name="picamera">DiddyBorg Camera</string>
+    <string name="picamera">Metalborg Camera</string>
 </resources>

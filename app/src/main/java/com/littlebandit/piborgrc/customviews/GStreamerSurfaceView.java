@@ -11,20 +11,24 @@ import android.view.SurfaceView;
  */
 
 // A simple SurfaceView whose width and height can be set from the outside
-public class GStreamerSurfaceView extends SurfaceView {
-    public int media_width = 320;
-    public int media_height = 240;
+public class GStreamerSurfaceView extends SurfaceView
+{
+    public int media_width = 1280;
+    public int media_height = 720;
 
     // Mandatory constructors, they do not do much
-    public GStreamerSurfaceView(Context context, AttributeSet attrs, int defStyle) {
+    public GStreamerSurfaceView(Context context, AttributeSet attrs, int defStyle)
+    {
         super(context, attrs, defStyle);
     }
 
-    public GStreamerSurfaceView(Context context, AttributeSet attrs) {
+    public GStreamerSurfaceView(Context context, AttributeSet attrs)
+    {
         super(context, attrs);
     }
 
-    public GStreamerSurfaceView (Context context) {
+    public GStreamerSurfaceView (Context context)
+    {
         super(context);
     }
 
@@ -32,44 +36,50 @@ public class GStreamerSurfaceView extends SurfaceView {
     // We will try to maximize our size, and preserve the media's aspect ratio if
     // we are given the freedom to do so.
     @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
+    {
         int width = 0, height = 0;
-        int wmode = MeasureSpec.getMode(widthMeasureSpec);
-        int hmode = MeasureSpec.getMode(heightMeasureSpec);
-        int wsize = MeasureSpec.getSize(widthMeasureSpec);
-        int hsize = MeasureSpec.getSize(heightMeasureSpec);
+        int wMode = MeasureSpec.getMode(widthMeasureSpec);
+        int hMode = MeasureSpec.getMode(heightMeasureSpec);
+        int wSize = MeasureSpec.getSize(widthMeasureSpec);
+        int hSize = MeasureSpec.getSize(heightMeasureSpec);
 
         Log.i ("GStreamer", "onMeasure called with " + media_width + "x" + media_height);
         // Obey width rules
-        switch (wmode) {
+        switch (wMode)
+        {
             case MeasureSpec.AT_MOST:
-                if (hmode == MeasureSpec.EXACTLY) {
-                    width = Math.min(hsize * media_width / media_height, wsize);
+                if (hMode == MeasureSpec.EXACTLY)
+                {
+                    width = Math.min(hSize * media_width / media_height, wSize);
                     break;
                 }
             case MeasureSpec.EXACTLY:
-                width = wsize;
+                width = wSize;
                 break;
             case MeasureSpec.UNSPECIFIED:
                 width = media_width;
         }
 
         // Obey height rules
-        switch (hmode) {
+        switch (hMode)
+        {
             case MeasureSpec.AT_MOST:
-                if (wmode == MeasureSpec.EXACTLY) {
-                    height = Math.min(wsize * media_height / media_width, hsize);
+                if (wMode == MeasureSpec.EXACTLY)
+                {
+                    height = Math.min(wSize * media_height / media_width, hSize);
                     break;
                 }
             case MeasureSpec.EXACTLY:
-                height = hsize;
+                height = hSize;
                 break;
             case MeasureSpec.UNSPECIFIED:
                 height = media_height;
         }
 
         // Finally, calculate best size when both axis are free
-        if (hmode == MeasureSpec.AT_MOST && wmode == MeasureSpec.AT_MOST) {
+        if (hMode == MeasureSpec.AT_MOST && wMode == MeasureSpec.AT_MOST)
+        {
             int correct_height = width * media_height / media_width;
             int correct_width = height * media_width / media_height;
 
@@ -84,5 +94,4 @@ public class GStreamerSurfaceView extends SurfaceView {
         height = Math.max (getSuggestedMinimumHeight(), height);
         setMeasuredDimension(width, height);
     }
-
 }
