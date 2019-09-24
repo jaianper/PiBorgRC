@@ -15,7 +15,7 @@ interval = .05
 
 # PiCamera stream values
 UDP_HOST = "192.168.0.10"  # IP of the mobile device
-UDP_PORT = 9000
+UDP_PORT = "9000"
 
 # Global values
 global PBR
@@ -119,6 +119,6 @@ finally:
     print 'Motors off'
     conn.close() # Close connections
 
-os.system("killall raspivid");
+os.system("sudo killall raspivid");
 PBR.SetLed(True)
 print 'Socket Server terminated.'
