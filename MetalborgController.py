@@ -14,7 +14,7 @@ SERVER_PORT = 12345
 interval = .05
 
 # PiCamera stream values
-UDP_HOST = "192.168.0.10"  # IP of the mobile device
+UDP_HOST = "192.168.1.3"  # IP of the mobile device
 UDP_PORT = "9000"
 
 # Global values
@@ -32,7 +32,7 @@ if not PBR.foundChip:
         print 'No PicoBorg Reverse at address %02X, but we did find boards:' % (PBR.i2cAddress)
         for board in boards:
             print '    %02X (%d)' % (board, board)
-        print 'If you need to change the IÂ²C address change the setup line so it is correct, e.g.'
+        print 'If you need to change the I²C address change the setup line so it is correct, e.g.'
         print 'PBR.i2cAddress = 0x%02X' % (boards[0])
     sys.exit()
 #PBR.SetEpoIgnore(True)                 # Uncomment to disable EPO latch, needed if you do not have a switch / jumper
@@ -51,15 +51,18 @@ else:
 
 # Start sequence
 print 'Setup camera'
-os.system("raspivid -n -w 320 -h 240 -b 4500000 -fps 10 -vf -hf -t 0 -o - | "+
-          "gst-launch-1.0 -e -v fdsrc !  h264parse ! rtph264pay config-interval=10 pt=96 ! udpsink host="+UDP_HOST+" port="+UDP_PORT+"&");
+os.system("killall raspivid")
+os.system("raspivid -n -w 640 -h 480 -b 4096000 -fps 30 -vf -hf -t 0 -o - | "+
+          "gst-launch-1.0 -e -v fdsrc ! h264parse ! rtph264pay config-interval=10 pt=96 ! udpsink host="+UDP_HOST+" port="+UDP_PORT+"&")
+#os.system("raspivid -n -w 720 -h 480 -b 32768000 -fps 30 -vf -hf -t 0 -o - | "+
+#          "gst-launch-1.0 -e -v fdsrc ! h264parse ! rtph264pay config-interval=10 pt=96 ! udpsink host="+UDP_HOST+" port="+UDP_PORT+"&")
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 print 'Socket created'
 
 try:
     s.bind((SERVER_HOST, SERVER_PORT))
-    
+
     s.listen(5)
     print 'Socket awaiting messages'
     (conn, addr) = s.accept()
@@ -68,6 +71,13 @@ try:
     # awaiting for message
     while True:
         reqData = conn.recv(1024)
+
+        if not reqData:
+            print 'The connection has been lost.'
+            break
+        if reqData.startswith('exit'):
+            print 'Exiting.'
+            break
         if reqData.startswith('/'):
             print 'I sent a message back in response to: ' + reqData
         reply = ''
@@ -117,8 +127,10 @@ finally:
     # Turn the motors off under all scenarios
     PBR.MotorsOff()
     print 'Motors off'
-    conn.close() # Close connections
 
-os.system("sudo killall raspivid");
+    if conn:
+        conn.close() # Close connections
+
+os.system("sudo killall raspivid")
 PBR.SetLed(True)
 print 'Socket Server terminated.'

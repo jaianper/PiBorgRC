@@ -1,4 +1,5 @@
 /app/gst-build*
+/app/gst-android-build
 /app/build
 /app/.externalNativeBuild
 /.idea

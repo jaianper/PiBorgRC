@@ -1,11 +1,11 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion 33
     defaultConfig {
-        applicationId "com.littlebandit.piborgrc"
+        applicationId "com.jaianper.piborgrc"
         minSdkVersion 15
-        targetSdkVersion 26
+        targetSdkVersion 33
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -26,7 +26,7 @@ android {
                 arguments "NDK_APPLICATION_MK=src/main/jni/Application.mk", "GSTREAMER_JAVA_SRC_DIR=src/main/java", "GSTREAMER_ROOT_ANDROID=$gstRoot", "GSTREAMER_ASSETS_DIR=src/main/assets"
 
                 targets 'cam_stream'
-                abiFilters 'armeabi-v7a'
+                abiFilters 'arm64-v8a'
             }
         }
     }
@@ -44,18 +44,20 @@ android {
     }
     externalNativeBuild {
         cmake {
-            version "3.10.2"
+            version "3.22.1"
         }
         ndkBuild {
             path 'src/main/jni/Android.mk'
         }
     }
+    ndkVersion '21.4.7075529'
+    namespace 'com.jaianper.piborgrc'
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:26.1.0'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support.constraint:constraint-layout:2.0.4'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'

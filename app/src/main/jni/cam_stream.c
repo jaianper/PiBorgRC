@@ -331,7 +331,7 @@ jint JNI_OnLoad(JavaVM *vm, void *reserved) {
         __android_log_print (ANDROID_LOG_ERROR, "cam_stream", "Could not retrieve JNIEnv");
         return 0;
     }
-    jclass klass = (*env)->FindClass (env, "com/littlebandit/piborgrc/remotecontrol/PiCameraStream");
+    jclass klass = (*env)->FindClass (env, "com/jaianper/piborgrc/remotecontrol/PiCameraStream");
     (*env)->RegisterNatives (env, klass, native_methods, G_N_ELEMENTS(native_methods));
 
     pthread_key_create (&current_jni_env, detach_current_thread);
